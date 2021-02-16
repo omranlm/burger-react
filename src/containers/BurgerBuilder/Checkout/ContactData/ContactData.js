@@ -5,7 +5,9 @@ import Spinner from "../../../../componenets/UI/Spinner/Spinner";
 import axios from "../../../../axios";
 import { withRouter } from "react-router";
 import Input from "../../../../componenets/UI/Input/Input";
-
+import { connect } from "react-redux";
+import withErrorHander from '../../../../hoc/withErrorHandler/withErrorHanlder'
+import * as actionCraetor from '../../../../store/actions/index'
 class ContactData extends Component {
   state = {
     orderForm: {
@@ -91,7 +93,7 @@ class ContactData extends Component {
 
   orderhandler = (event) => {
     event.preventDefault();
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
 
     const formData = {};
     
@@ -101,26 +103,27 @@ class ContactData extends Component {
     }
 
     const order = {
-      ingredients: this.props.ingredients,
+      ingredients: this.props.ing,
       price: this.props.totalPrice,
       orderData: formData,
     };
-    axios
-      .post('/orders.json', order)
-      .then((response) => {
-        this.setState({
-          loading: false,
-        });
-        this.props.history.push('/');
-      })
-      .catch((error) => {
-        this.setState({
-          loading: false,
-          purchasing: false,
-        });
-        console.log(error);
-      })
-      .finally();
+    this.props.onOrderBurger(order)
+    // axios
+    //   .post('/orders.json', order)
+    //   .then((response) => {
+    //     this.setState({
+    //       loading: false,
+    //     });
+    //     this.props.history.push('/');
+    //   })
+    //   .catch((error) => {
+    //     this.setState({
+    //       loading: false,
+    //       purchasing: false,
+    //     });
+    //     console.log(error);
+    //   })
+    //   .finally();
   };
 
   inputChangeHandler = (event,key) =>
@@ -173,7 +176,7 @@ class ContactData extends Component {
     //console.log('formElementsArray',formElementsArray);
     //console.log('ContactData props', this.props);
     let form = null;
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner></Spinner>;
     } else {
       form = (
@@ -210,4 +213,21 @@ class ContactData extends Component {
     );
   }
 }
-export default withRouter(ContactData);
+
+const mapState = state =>
+{
+  return {
+    ing: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+    loading: state.order.loading
+  }
+}
+
+const mapDispatch =  dispatch => {
+  return {
+    onOrderBurger: (orderData) => dispatch(actionCraetor.purchaseBurger(orderData))
+  }
+  
+}
+
+export default connect(mapState,mapDispatch)(withRouter(withErrorHander(ContactData,axios)));

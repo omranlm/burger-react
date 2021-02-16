@@ -6,7 +6,8 @@ const constols = [
   { label: "Salad", type: "salad" },
   { label: "Bacon", type: "bacon" },
   { label: "Cheese", type: "cheese" },
-  { label: "Meat", type: "meat" },
+  { label: "Meat", type: "meat" }, 
+
 ];
 const buildControls = (props) => (
   <div className={classes.BuildControls}>
@@ -17,7 +18,7 @@ const buildControls = (props) => (
         label={ctrl.label}
         added={() => props.added(ctrl.type)}
         removed={() => props.removed(ctrl.type)}
-        disabled={props.disabledInfo[ctrl.label]}
+        disabled={props.disabledInfo[ctrl.type]}
       />
     ))}
     <button 
