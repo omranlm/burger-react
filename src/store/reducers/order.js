@@ -15,8 +15,6 @@ const reducer = (state = initialState,action) =>
                 purchased:false,
 
             }   
-
-
         case actionTypes.PURCHASEB_BURGER_Start:
             return{
                 ...state,

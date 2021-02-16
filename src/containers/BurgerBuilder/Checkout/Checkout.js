@@ -11,10 +11,7 @@ class Checkout extends Component {
   state = {
     loading: false,
   };
-  componentWillMount()
-  {
-     this.props.onPurchaseInit();
-  }
+  
   onCheckoutCanceledhandler = () => {
     this.props.history.goBack();
     //    this.props.history.
