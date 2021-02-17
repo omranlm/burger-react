@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Toolbar from "../Navigation/Toolbar/Toolbar";
 import classes from "./Layout.css";
 import SideDrawer from "../Navigation/SideDrawer/SideDrawer";
+import { connect } from "react-redux";
 
 class Layout extends Component {
     state =
@@ -26,9 +27,11 @@ class Layout extends Component {
     render() {
     return (
       <React.Fragment>
-        <Toolbar menuClicked={this.toggleSideDrawer}></Toolbar>
+        <Toolbar menuClicked={this.toggleSideDrawer}
+        isAuth={this.props.isAuth}></Toolbar>
         <SideDrawer open={this.state.showSideDrawer} 
-        closed={this.sideDrawerClosedHandler}>
+        closed={this.sideDrawerClosedHandler}
+        isAuth={this.props.isAuth}>
 
         </SideDrawer>
         <main className={classes.Content}>{this.props.children}</main>
@@ -37,4 +40,10 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+const mapStateToProps = state =>
+{
+    return {
+        isAuth : state.auth.token !== null
+    }
+}
+export default connect(mapStateToProps)(Layout);

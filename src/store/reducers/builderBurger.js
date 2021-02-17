@@ -3,7 +3,8 @@ import util from '../utility'
 const initialState = {
     ingredients: null,
     totalPrice : 4,
-    error: false
+    error: false,
+    building: false
 }
 
 const ING_PRICES = {
@@ -25,6 +26,7 @@ const reducer = (state = initialState,action) =>
                 [action.ingredientName]: state.ingredients[[action.ingredientName]] + 1 
             },
             totalPrice: state.totalPrice + ING_PRICES[action.ingredientName],
+            building: true
         };
 
         case (actionTypes.REMOVE_INGREDIENT):
@@ -35,6 +37,7 @@ const reducer = (state = initialState,action) =>
                 [action.ingredientName]: state.ingredients[[action.ingredientName]] - 1 
             },
             totalPrice: state.totalPrice - ING_PRICES[action.ingredientName],
+            building: true
         }
         case (actionTypes.INIT_INGREDIENT):
 
@@ -43,6 +46,7 @@ const reducer = (state = initialState,action) =>
                 ingredients: action.ingredients,
                 error: false,
                 totalPrice : 4,
+                building: false,
             }
 
             case (actionTypes.INIT_INGREDIENT_FAILED):

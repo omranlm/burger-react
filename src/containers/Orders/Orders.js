@@ -14,7 +14,7 @@ class Orders extends Component
     }
     componentDidMount()
     {
-        this.props.onFetchOrders();
+        this.props.onFetchOrders(this.props.token,this.props.userId);
     }
     render()
     { 
@@ -44,12 +44,14 @@ const mapProps = state =>
     return {
         ordersList: state.order.orders,
         loading:  state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId
     }
 }
 const mapDispaotch = dispatch =>
 {
     return {
-        onFetchOrders: ()=> dispatch(actionCraetor.fetchOrders())
+        onFetchOrders: (token,userId)=> dispatch(actionCraetor.fetchOrders(token,userId))
     }
 }
 export default connect(mapProps,mapDispaotch)(withErrorHander(Orders,axios));

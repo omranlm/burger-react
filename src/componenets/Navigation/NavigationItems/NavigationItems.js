@@ -13,17 +13,43 @@ const navigationItems = (props) => (
        Burger Builder
       </NavLink>
       </li>
-      <li className={classes.NavigationItem}>
+      {
+        props.isAuth ? <li className={classes.NavigationItem}>
      
+        <NavLink 
+        to="/orders" 
+        exact
+        activeClassName={classes.active}
+        
+        >
+          Orders
+        </NavLink>
+      </li> : null
+      }
+
+    {
+      props.isAuth ? <li className={classes.NavigationItem}>     
       <NavLink 
-      to="/orders" 
+      to="/logout" 
       exact
       activeClassName={classes.active}
       
       >
-        Orders
+        Log out
       </NavLink>
     </li>
+    :
+      <li className={classes.NavigationItem}>     
+      <NavLink 
+      to="/auth" 
+      exact
+      activeClassName={classes.active}
+      
+      >
+        Authenticate
+      </NavLink>
+    </li>
+    }
 
   </ul>
 );
