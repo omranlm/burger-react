@@ -9,7 +9,7 @@ const withErrorHandler = (WrappedComponenet, axios) => {
    
     constructor (props)
     {
-        console.log(' withErrorHandler constructor ');
+        // console.log(' withErrorHandler constructor ');
        
         super(props);
         this.reqInter = axios.interceptors.request.use(req=>
@@ -26,7 +26,7 @@ const withErrorHandler = (WrappedComponenet, axios) => {
 
     componentWillUnmount ()
     {
-        console.log(' withErrorHandler componentWillUnmount ');
+        // console.log(' withErrorHandler componentWillUnmount ');
         axios.interceptors.request.eject(this.reqInter);
         axios.interceptors.response.eject(this.resInter);
     }

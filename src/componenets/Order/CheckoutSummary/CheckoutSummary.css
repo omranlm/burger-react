@@ -5,10 +5,3 @@
     margin: auto;
 }
 
-@mesia (min-width: 600px)
-{
-    .CheckoutSummary
-    {
-        width:500px;
-    }
-}

@@ -4,7 +4,6 @@ import Button from '../../componenets/UI/Button/Button';
 import classes from './Auth.css';
 import * as actionCreator from '../../store/actions/index'
 import { connect } from 'react-redux';
-import { setIng } from '../../store/actions/bulderBurger';
 import Spinner from '../../componenets/UI/Spinner/Spinner'
 import { Redirect } from 'react-router';
 class Auth extends Component

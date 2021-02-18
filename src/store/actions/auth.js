@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+
 import * as actionTypes from "./actions";
 import axios from "axios";
 export const authStart = () => {
@@ -45,7 +45,7 @@ export const logout = () =>
 export const auth = (email, password, isSignup) => {
   return (dispatch) => {
     //...
-    console.log("dispatch", dispatch);
+    // console.log("dispatch", dispatch);
     dispatch(authStart());
     const authData = {
       email: email,
@@ -63,7 +63,7 @@ export const auth = (email, password, isSignup) => {
     axios
       .post(url, authData)
       .then((response) => {
-        console.log("response", response);
+        // console.log("response", response);
         localStorage.setItem('token',response.data.idToken);
         const expirationDate = new Date(new Date ().getTime() + response.data.expiresIn*100);
         localStorage.setItem('expirationDate',expirationDate);
@@ -73,11 +73,11 @@ export const auth = (email, password, isSignup) => {
         dispatch(checkAuthTimeout(response.data.expiresIn));
       })
       .catch((err) => {
-        console.log('err',err);
+        // console.log('err',err);
         dispatch(authFail(err.response.data.error));
       })
       .finally(() => {
-        console.log("finally");
+        // console.log("finally");
       });
   };
 };
@@ -92,7 +92,7 @@ export const setAuthRedirect = (path) =>
 
 export const authCheckState = () =>{
     return dispatch => {
-        console.log('authCheckState()')
+        // console.log('authCheckState()')
         const token=localStorage.getItem('token');
         if (!token)
         {

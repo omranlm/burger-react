@@ -1,6 +1,5 @@
 import * as actionTypes from './actions'
 import axios from '../../axios'
-import order from '../../componenets/Order/Order'
 export const purchaseBurgerSuccess = (id,orderData) =>
 {
     return {
@@ -33,7 +32,7 @@ export const purchaseBurger = (orderData,token) =>
         .post('/orders.json?auth='+ token, orderData)
         .then((response) => {
       
-            console.log('response.data ',response.data);
+            // console.log('response.data ',response.data);
             dispatch(purchaseBurgerSuccess(response.data.name,orderData))
         })
         .catch((error) => {
@@ -79,7 +78,7 @@ export const fetchOrders = (token,userId) =>{
     
     return dispatch =>
     {
-        console.log('token',token);
+        // console.log('token',token);
         dispatch(fetchOrdersStart());
         const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
         axios.get('/orders.json' + queryParams)
@@ -94,7 +93,7 @@ export const fetchOrders = (token,userId) =>{
                         id: key
                     })
                 }
-                console.log('orders',orders);
+                // console.log('orders',orders);
                
                dispatch(fetchOrdersSuccess(orders))
             }

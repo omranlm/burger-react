@@ -150,7 +150,7 @@ class ContactData extends Component {
 
         })
        
-     console.log('updateOrderForm',updateOrderForm);
+    //  console.log('updateOrderForm',updateOrderForm);
   }
   checkValidity = (value,rules) =>
   {

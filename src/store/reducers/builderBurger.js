@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actions'
-import util from '../utility'
+
 const initialState = {
     ingredients: null,
     totalPrice : 4,

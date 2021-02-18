@@ -27,7 +27,7 @@ const order = props =>{
             key={ig.name}>{ig.name} ({ig.amount}) </span>
         });
     return(
-        <div>
+        <div className={classes.Order}>
             {ingOutput}
             <p>Price <strong>({props.order.price})</strong></p>
         </div>

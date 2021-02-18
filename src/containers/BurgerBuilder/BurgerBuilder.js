@@ -8,12 +8,7 @@ import axios from "../../axios";
 import withErrorHander from "../../hoc/withErrorHandler/withErrorHanlder";
 import { connect } from "react-redux";
 import * as actionCreator from "../../store/actions/index";
-const ING_PRICES = {
-  salad: 1.1,
-  bacon: 2.2,
-  cheese: 3.3,
-  meat: 4.4,
-};
+
 
 class BurgerBuilder extends Component {
   constructor(props) {
@@ -83,7 +78,7 @@ class BurgerBuilder extends Component {
     ) : (
       <Spinner></Spinner>
     );
-    console.log("this.props", this.props);
+    // console.log("this.props", this.props);
     if (this.props.ing) {
       burger = (
         <Fragment>

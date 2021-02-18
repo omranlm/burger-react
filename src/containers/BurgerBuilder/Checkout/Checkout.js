@@ -4,7 +4,7 @@ import React from "react";
 import CheckoutSummary from "../../../componenets/Order/CheckoutSummary/CheckoutSummary";
 import { Route, Redirect } from "react-router";
 import ContactData from "./ContactData/ContactData";
-import axios from "../../../axios";
+
 import { connect } from "react-redux";
 import * as actionCreator from '../../../store/actions/index'
 class Checkout extends Component {
