@@ -1,28 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Order from '../../componenets/Order/Order';
 import axios from '../../axios'
 import Spinner from '../../componenets/UI/Spinner/Spinner'
 import * as actionCraetor from '../../store/actions/index'
 import withErrorHander from '../../hoc/withErrorHandler/withErrorHanlder'
 import { connect } from 'react-redux';
-class Orders extends Component
+const orders = props => 
 {
+    const 
     state = 
     {
         orders:null,
         loading: true
     }
-    componentDidMount()
-    {
-        this.props.onFetchOrders(this.props.token,this.props.userId);
-    }
-    render()
-    { 
+    const {onFetchOrders} = props;
+    useEffect(() => {
+        onFetchOrders(props.token,props.userId);
+        return () => {
+            
+        }
+    }, [onFetchOrders])
+       
+        
         let orders = <Spinner></Spinner>;
         //console.log('render this.props',this.props);
-        if(!this.props.loading)
+        if(!props.loading)
         {
-            orders= this.props.ordersList.map(order=>
+            orders= props.ordersList.map(order=>
                 ( 
                     <Order key={order.id} order={order}/>
                 ));
@@ -35,7 +39,7 @@ class Orders extends Component
             </div>
         );
 
-    }
+    
 }
 
 const mapProps = state =>
@@ -54,4 +58,4 @@ const mapDispaotch = dispatch =>
         onFetchOrders: (token,userId)=> dispatch(actionCraetor.fetchOrders(token,userId))
     }
 }
-export default connect(mapProps,mapDispaotch)(withErrorHander(Orders,axios));
+export default connect(mapProps,mapDispaotch)(withErrorHander(orders,axios));

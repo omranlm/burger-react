@@ -1,5 +1,4 @@
 import * as actionType from "./actions";
-import axios from '../../axios';
 
 export const addIngredient = (name) => {
   return {
@@ -28,14 +27,7 @@ export const fetchIngFailed = () => {
   };
 };
 export const initIng = () => {
-  return (dispatch) => {
-    axios
-      .get("/ingredients.json")
-      .then((response) => {
-        dispatch(setIng(response.data));
-      })
-      .catch((error) => {
-        dispatch(fetchIngFailed());
-      });
-  };
+  return {
+    type: actionType.BURGER_INIT
+  }
 };

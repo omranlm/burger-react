@@ -1,4 +1,4 @@
-import { Component, Fragment } from "react";
+import { Fragment } from "react";
 
 import React from "react";
 import CheckoutSummary from "../../../componenets/Order/CheckoutSummary/CheckoutSummary";
@@ -7,42 +7,41 @@ import ContactData from "./ContactData/ContactData";
 
 import { connect } from "react-redux";
 import * as actionCreator from '../../../store/actions/index'
-class Checkout extends Component {
-  state = {
-    loading: false,
-  };
-  
-  onCheckoutCanceledhandler = () => {
-    this.props.history.goBack();
+
+const checkout = props => {
+ 
+
+  const onCheckoutCanceledhandler = () => {
+    props.history.goBack();
     //    this.props.history.
     //alert('you continue!')
   };
 
-  onCheckoutContinueHamdler = () => {
-    this.props.history.replace("/checkout/contact-data");
+  const onCheckoutContinueHamdler = () => {
+    props.history.replace("/checkout/contact-data");
   };
-  render() {
+ 
     let summary = <Redirect to="/" />;
 
-    if (this.props.ing)
+    if (props.ing)
     {
-    const purchasedRedirect = this.props.purchased ? <Redirect to="/" /> : null
+    const purchasedRedirect = props.purchased ? <Redirect to="/" /> : null
       summary = (
         <Fragment>
           {purchasedRedirect}
           <CheckoutSummary
-            ingredients={this.props.ing}
-            onCheckoutCanceled={this.onCheckoutCanceledhandler}
-            onCheckoutContinue={this.onCheckoutContinueHamdler}
+            ingredients={props.ing}
+            onCheckoutCanceled={onCheckoutCanceledhandler}
+            onCheckoutContinue={onCheckoutContinueHamdler}
           />
           <Route
-            path={this.props.match.path + "/contact-data"}
+            path={props.match.path + "/contact-data"}
             component={ContactData}></Route>
         </Fragment>
       );
     }
     return <div>{summary}</div>;
-  }
+  
 }
 
 const mapProps = (state) => {
@@ -59,4 +58,4 @@ const mapDispatch = dispatch =>
     onPurchaseInit:() => dispatch(actionCreator.purchaseInit()),
   }
 }
-export default connect(mapProps, mapDispatch)(Checkout);
+export default connect(mapProps, mapDispatch)(checkout);
